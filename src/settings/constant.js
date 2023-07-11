@@ -20,7 +20,7 @@ export const LOADING_PROCESS_TYPE = [
 
 export const LOADING_PROCESS_STATE = {
 	enabled: false,
-	type: LOADING_PROCESS_TYPE[LOADING_PROCESS_TYPE.length - 1] || 'spokes',
+	type: LOADING_PROCESS_TYPE[2] || 'spokes',
 	body: '',
 };
 

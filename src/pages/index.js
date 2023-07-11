@@ -1,17 +1,9 @@
 import { lazy, memo, Suspense, useContext, useMemo, useReducer } from 'react';
 import { createRoot } from 'react-dom/client';
-import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import LoadingProcess from '../components/loadingProcess';
 import { Context, initialState, reducer } from '../settings/config';
 import { ACTION, PAGE } from '../settings/constant';
 import '../settings/global.less';
-import Landing from './landing';
-
-const RoutePages = memo(() => (
-	<Routes>
-		<Route path='/' element={<Landing>router page</Landing>} />
-	</Routes>
-));
 
 const Pages = memo(() => {
 	const [context] = useContext(Context);
@@ -39,9 +31,6 @@ const App = () => {
 	return (
 		<div className='App'>
 			<Context.Provider {...{ value }}>
-				<BrowserRouter>
-					<RoutePages />
-				</BrowserRouter>
 				<Pages />
 				{state[ACTION.LoadingProcess].enabled && <LoadingProcess />}
 			</Context.Provider>
