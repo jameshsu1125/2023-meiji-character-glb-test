@@ -45,6 +45,7 @@
 		"webpack-dev-server": "^4.15.1"
 	},
 	"dependencies": {
+		"lesca-click": "^4.3.2",
 		"lesca-enterframe": "^1.2.4",
 		"lesca-glb-loader": "^1.0.0",
 		"lesca-use-tween": "^3.0.1",

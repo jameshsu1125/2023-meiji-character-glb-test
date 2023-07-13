@@ -35,6 +35,7 @@ const Landing = memo(() => {
 			EnterFrame.add(() => {
 				const delta = webglRef.current.clock.getDelta();
 				mixer.forEach((e) => e.mixers[0].update(delta));
+				webglRef.current.stats.end();
 			});
 			setContext({ type: ACTION.LoadingProcess, state: { enabled: false } });
 			setTargetIndex(0);
