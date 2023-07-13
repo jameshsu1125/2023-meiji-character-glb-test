@@ -16,7 +16,7 @@ export const config = {
 		azimuth: -102.7,
 	},
 	controls: {
-		distance: { min: 30, max: 100 },
+		distance: { min: 30, max: 200 },
 		polar: { min: 5, max: 60 },
 		azimuth: { min: -Infinity, max: Infinity },
 		offsetAzimuth: 0,
@@ -26,15 +26,15 @@ export const config = {
 	light: {
 		ambient: {
 			color: 0x5289d2,
-			intensity: 0.6,
+			intensity: 3,
 		},
 		spot: {
 			color: 0xffffff,
-			intensity: 5,
+			intensity: 1,
 			far: 50,
-			position: { x: 10, y: 10, z: 0 },
+			position: { x: 0, y: 10, z: 10 },
 		},
-		shadowMapSize: 1024,
+		shadowMapSize: 512,
 	},
 	renderer: { alpha: false, shadowType: 0, exposure: 0.5 },
 	physics: false,
