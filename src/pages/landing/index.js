@@ -63,7 +63,7 @@ const Landing = memo(() => {
 				model.position.y = positionY;
 				const offsetX = [0, -1.2, 1];
 				model.position.x = offsetX[idx];
-				model.castShadow = true;
+				// model.castShadow = true;
 				gltf.scene.traverse((child) => {
 					const mesh = child;
 					if (mesh.isMesh) mesh.castShadow = true;
