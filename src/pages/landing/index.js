@@ -4,7 +4,9 @@ import Webgl from 'lesca-webgl-threejs';
 import { memo, useContext, useEffect, useRef, useState } from 'react';
 import * as THREE from 'three';
 import { LandingContext, LandingSteps, config } from './config';
-import Avatar1 from './glb/Combine_v2.glb';
+import Avatar1 from './glb/Combine_v3.glb';
+import Mushroom from './glb/Mushroom_pack.glb';
+import Bamboo from './glb/bamboo_pack.glb';
 import { Context } from '../../settings/config';
 import { ACTION } from '../../settings/constant';
 
@@ -19,13 +21,14 @@ const Landing = memo(() => {
 	const value = useState(LandingSteps);
 	const [index, setIndex] = useState(indexRef.current);
 	const [mixer, setMixer] = useState([]);
+	const [loadModelIndex, setLoadModelIndex] = useState(0);
 
 	useEffect(() => {
 		indexRef.current = index;
 	}, [index]);
 
 	useEffect(() => {
-		if (mixer.length !== 0) {
+		if (mixer.length !== 0 && loadModelIndex === 2) {
 			EnterFrame.add(() => {
 				const delta = webglRef.current.clock.getDelta();
 				mixer[indexRef.current].update(delta);
@@ -33,7 +36,7 @@ const Landing = memo(() => {
 			});
 			setContext({ type: ACTION.LoadingProcess, state: { enabled: false } });
 		}
-	}, [mixer]);
+	}, [mixer, loadModelIndex]);
 
 	useEffect(() => {
 		setContext({ type: ACTION.LoadingProcess, state: { enabled: true } });
@@ -51,19 +54,22 @@ const Landing = memo(() => {
 		planeMesh.position.y = -1.23;
 		webgl.scene.add(planeMesh);
 
-		const glbs = [Avatar1];
+		const glbs = [Avatar1, Mushroom, Bamboo];
 		Promise.all(glbs.map((e) => GlbLoader(e))).then((items) => {
-			items.forEach((e) => {
+			items.forEach((e, idx) => {
 				const { model, mixers, gltf } = e;
 				model.scale.set(scale, scale, scale);
 				webgl.scene.add(model);
 				model.position.y = positionY;
+				const offsetX = [0, -1.2, 1];
+				model.position.x = offsetX[idx];
 				model.castShadow = true;
 				gltf.scene.traverse((child) => {
 					const mesh = child;
 					if (mesh.isMesh) mesh.castShadow = true;
 				});
-				setMixer(mixers);
+				if (mixers.length > 0) setMixer(mixers);
+				setLoadModelIndex(idx);
 			});
 		});
 	}, []);
