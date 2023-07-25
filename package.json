@@ -47,13 +47,13 @@
 	"dependencies": {
 		"lesca-click": "^4.3.2",
 		"lesca-enterframe": "^1.2.4",
-		"lesca-glb-loader": "^1.0.0",
+		"lesca-glb-loader": "1.0.0",
 		"lesca-use-tween": "^3.0.1",
-		"lesca-webgl-threejs": "^1.1.1",
+		"lesca-webgl-threejs": "1.1.1",
 		"react": "^18.2.0",
 		"react-dom": "^18.2.0",
 		"react-loading": "^2.0.3",
 		"react-router-dom": "^6.14.1",
-		"three": "^0.154.0"
+		"three": "0.142.0"
 	}
 }
