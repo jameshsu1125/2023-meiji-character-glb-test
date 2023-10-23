@@ -5,9 +5,9 @@ export const LandingState = { steps: LandingSteps.unset };
 export const LandingContext = createContext(LandingState);
 
 export const config = {
-	camera: { fov: 40, far: 200 },
+	camera: { fov: 10, far: 200 },
 	sky: {
-		enabled: true,
+		enabled: false,
 		turbidity: 0,
 		rayleigh: 0.079,
 		mieCoefficient: 0.023,
@@ -36,7 +36,7 @@ export const config = {
 		},
 		shadowMapSize: 512,
 	},
-	renderer: { alpha: false, shadowType: 0, exposure: 0.5 },
+	renderer: { alpha: false, shadowType: 0, exposure: 1, preserveDrawingBuffer: true },
 	physics: false,
 	stats: true,
 };

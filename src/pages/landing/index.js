@@ -44,6 +44,8 @@ const Landing = memo(() => {
 		ref.current.appendChild(webgl.render.domElement);
 		webglRef.current = webgl;
 
+		webgl.render.setClearColor(0x000000, 0);
+
 		const material = new THREE.MeshStandardMaterial();
 		material.metalness = 0;
 		material.roughness = 0.4;
@@ -52,14 +54,15 @@ const Landing = memo(() => {
 		const planeMesh = new THREE.Mesh(plane, material);
 		planeMesh.receiveShadow = true;
 		planeMesh.position.y = -1.23;
-		webgl.scene.add(planeMesh);
+		// webgl.scene.add(planeMesh);
 
 		const glbs = [Avatar1, Mushroom, Bamboo];
 		Promise.all(glbs.map((e) => GlbLoader(e))).then((items) => {
 			items.forEach((e, idx) => {
 				const { model, mixers, gltf } = e;
 				model.scale.set(scale, scale, scale);
-				webgl.scene.add(model);
+
+				if (idx === 0) webgl.scene.add(model);
 				model.position.y = positionY;
 				const offsetX = [0, -1.2, 1];
 				model.position.x = offsetX[idx];
@@ -98,6 +101,22 @@ const Landing = memo(() => {
 					onClick={() => setIndex(2)}
 				>
 					揮手
+				</button>
+				<button
+					className='w-full border hover:bg-gray-700'
+					type='button'
+					onClick={() => {
+						const canvas = webglRef.current.render.domElement;
+						const base64 = canvas.toDataURL('image/png', 1.0);
+
+						const link = document.createElement('a');
+						link.download = 'demo.png';
+						link.href = base64;
+						link.target = '_blank';
+						link.click();
+					}}
+				>
+					截圖
 				</button>
 			</div>
 		</LandingContext.Provider>
